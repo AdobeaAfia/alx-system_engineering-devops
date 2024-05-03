@@ -33,19 +33,20 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
-frontend clickviral-frontend
+#--omarflex.tech-params-begin--
+frontend omarflex-frontend
         bind *:80
         mode http
         http-request redirect scheme https code 301 unless { ssl_fc }
         http-request set-header X_Forwarded-Proto http
-        default_backend clickviral-backend
+        default_backend omarflex.tech-backend
 
-frontend clickviral-frontend-https
+frontend omarflex.tech-frontend-https
         bind *:443 ssl crt /etc/haproxy/certs/clickviral.tech.pem
         http-request set-header X-Forwarded-Proto https
-        default_backend clickviral-backend
+        default_backend omarflex.tech-backend
 
-backend clickviral-backend
+backend omarflex.tech-backend
         balance roundrobin
-        server 530372-web-01 52.72.66.113:80 check
-        server 530372-web-02 100.27.3.143:80 check
+        server 530397-web-01 3.80.19.249:80 check
+        server 530397-web-02 107.21.39.244:80 check
